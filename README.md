@@ -2,6 +2,8 @@
 
 A small, responsive, step-by-step questionnaire. It runs as plain HTML, CSS, and JavaScript, so there is no build step or package install.
 
+Christina's portrait is bundled at `assets/christina.jpg` and appears throughout the questionnaire. Replace that file to use a different photo.
+
 ## Run locally
 
 Open `index.html` in a browser. The question text and choices are configured near the top of `script.js`.

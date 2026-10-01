@@ -92,14 +92,14 @@ let soundEnabled = true;
 let audioContext;
 let encouragementTimer;
 const encouragementMessages = [
-  "Thanks for sharing that.",
-  "That was lovely to hear.",
-  "I'm glad you told me.",
-  "Every little detail helps me know you better.",
-  "Thank you for letting me in.",
-  "That sounds special.",
-  "I'll remember that.",
-  "Your honesty means a lot."
+  "You make even the little moments feel special 💛",
+  "I love getting to know what makes you, you 💕",
+  "Hearing that made my heart smile 🌻",
+  "That sounds like a moment I'd treasure with you ✨",
+  "Thank you for letting me a little closer 💗",
+  "I feel lucky to share these little moments with you 🥰",
+  "I hope we make more memories like that together 🌷",
+  "You have a way of making ordinary days sweeter ☀️"
 ];
 
 function setPrivacyNote(message) {

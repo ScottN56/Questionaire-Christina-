@@ -115,6 +115,32 @@ function formatAnswers() {
   return questions.map((question, index) => answers[index] ? `${question.prompt}\n${answers[index]}` : "").filter(Boolean).join("\n\n");
 }
 
+function openSubmissionDraft() {
+  const answerText = formatAnswers();
+  const emailLink = content.querySelector(".email-button");
+  if (!answerText || !emailLink) {
+    setPrivacyNote("No answers to copy yet. You can still review or add an answer.");
+    return;
+  }
+
+  setPrivacyNote("Copying your answers and opening an email draft. Review it before sending.");
+  try {
+    const copy = navigator.clipboard?.writeText(answerText);
+    if (copy) {
+      copy.then(
+        () => setPrivacyNote("Answers copied. Check your email draft and press Send when ready."),
+        () => setPrivacyNote("Email draft opening. Clipboard access was blocked; use Copy my answers if needed.")
+      );
+    } else {
+      setPrivacyNote("Email draft opening. Use Copy my answers if clipboard access is unavailable.");
+    }
+  } catch {
+    setPrivacyNote("Email draft opening. Clipboard access was blocked; use Copy my answers if needed.");
+  }
+
+  emailLink.click();
+}
+
 function showEncouragement() {
   const messageIndex = Math.floor(Math.random() * encouragementMessages.length);
   encouragementToast.textContent = encouragementMessages[messageIndex];
@@ -383,6 +409,7 @@ form.addEventListener("submit", (event) => {
     if (respondent === respondentOptions[0]) {
       currentStep += 1;
       renderSummary();
+      openSubmissionDraft();
     } else {
       answers.fill("");
       currentStep += 2;

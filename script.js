@@ -14,11 +14,53 @@ const questions = [
     options: ["Something sweet", "Something salty", "A bit of both"]
   },
   {
-    prompt: "Is there something you have been wanting to do together?",
-    hint: "A place, a plan, or even a small everyday thing.",
+    prompt: "What shared moment with us still makes you smile?",
+    hint: "It can be something big or completely ordinary.",
     type: "text",
-    required: true,
-    placeholder: "Write whatever comes to mind..."
+    required: false,
+    placeholder: "A moment you like remembering..."
+  },
+  {
+    prompt: "What is a small thing that makes you feel cared for?",
+    hint: "The little things count, too.",
+    type: "text",
+    required: false,
+    placeholder: "Share as much or as little as you like..."
+  },
+  {
+    prompt: "What is something you have felt proud of lately?",
+    hint: "A win, a change, or something you handled your way.",
+    type: "text",
+    required: false,
+    placeholder: "Anything that comes to mind..."
+  },
+  {
+    prompt: "How would you most like to spend a free evening together?",
+    hint: "Pick whichever feels most like you.",
+    type: "choice",
+    required: false,
+    options: ["Stay in and make something cozy", "Go out somewhere new", "Take a walk and see where we end up"]
+  },
+  {
+    prompt: "What is something new you would love for us to try together?",
+    hint: "It can be a small plan or a bigger adventure.",
+    type: "text",
+    required: false,
+    placeholder: "A place, a hobby, or an experience..."
+  },
+  {
+    prompt: "On a hard day, what kind of support feels best?",
+    hint: "Choose what usually helps most.",
+    type: "choice",
+    required: false,
+    options: ["Someone to listen", "A little quiet company", "Practical help", "Being asked what I need"]
+  },
+  {
+    prompt: "What would you like us to make more time for?",
+    hint: "Anything you miss or want more of is welcome.",
+    type: "text",
+    required: false,
+    placeholder: "A ritual, a conversation, or time together..."
   },
   {
     prompt: "Anything else you would like to add?",

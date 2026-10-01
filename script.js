@@ -83,6 +83,9 @@ const formError = document.querySelector("#form-error");
 const soundToggle = document.querySelector("#sound-toggle");
 const soundLabel = document.querySelector("#sound-label");
 const encouragementToast = document.querySelector("#encouragement-toast");
+const welcomeDialog = document.querySelector("#welcome-dialog");
+const welcomeClose = document.querySelector("#welcome-close");
+const welcomeEnter = document.querySelector("#welcome-enter");
 const answers = Array(questions.length).fill("");
 const respondentOptions = ["Christina <3", "Somebody who shouldn't be looking at this. Get out."];
 const responseEmail = "chaos13.sn@gmail.com";
@@ -458,4 +461,17 @@ soundToggle.addEventListener("click", () => {
   soundLabel.textContent = soundEnabled ? "Sound on" : "Sound off";
 });
 
+function closeWelcomeMessage() {
+  welcomeDialog.close();
+  content.querySelector("input, textarea")?.focus();
+}
+
+welcomeClose.addEventListener("click", closeWelcomeMessage);
+welcomeEnter.addEventListener("click", closeWelcomeMessage);
+welcomeDialog.addEventListener("click", (event) => {
+  if (event.target === welcomeDialog) closeWelcomeMessage();
+});
+
 renderQuestion();
+welcomeDialog.showModal();
+welcomeEnter.focus();

@@ -40,6 +40,61 @@ button { color: inherit; }
   margin: 0 auto;
 }
 
+.welcome-dialog {
+  width: min(480px, calc(100vw - 32px));
+  max-width: none;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid #e9afc5;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  box-shadow: 10px 10px 0 #dce7fb, 0 22px 70px rgb(37 52 93 / 28%);
+  animation: welcome-arrive 260ms ease-out both;
+}
+.welcome-dialog::backdrop { background: rgb(37 52 93 / 42%); backdrop-filter: blur(4px); }
+.welcome-card {
+  position: relative;
+  padding: 38px 36px 32px;
+  border-radius: inherit;
+  background: linear-gradient(145deg, #fffdf8, #fff4db 62%, #fff0f5);
+  text-align: center;
+}
+.welcome-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 34px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--blue-dark);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+.welcome-close:hover { border-color: var(--pink); color: #c54f7c; }
+.welcome-close:focus-visible, .welcome-enter:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+.welcome-flower { display: inline-block; color: var(--pink); font-size: 28px; line-height: 1; }
+.welcome-eyebrow { margin: 15px 0 8px; color: var(--blue-dark); font-size: 10px; font-weight: 750; letter-spacing: 1.4px; }
+.welcome-title { margin: 0 0 13px; color: var(--blue-dark); font-family: Georgia, "Times New Roman", serif; font-size: 30px; font-weight: 400; line-height: 1.15; }
+.welcome-message { max-width: 360px; margin: 0 auto 24px; color: #53658f; font-size: 15px; line-height: 1.65; }
+.welcome-enter {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--blue);
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 650;
+}
+.welcome-enter:hover { background: var(--blue-dark); }
+
 .sunflower-field {
   position: fixed;
   z-index: 0;
@@ -278,6 +333,7 @@ h1 em { color: var(--blue); font-weight: 400; }
 .page-footer { min-height: 58px; border-top: 1px solid var(--line); border-bottom: 0; font-size: 9px; }
 .footer-slash { padding: 0 5px; color: var(--pink); }
 @keyframes appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes welcome-arrive { from { opacity: 0; transform: translateY(8px) scale(0.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes questionnaire-page-turn {
   0% { opacity: 0.25; transform: rotateY(-48deg) translateX(32px); }
   52% { opacity: 1; transform: rotateY(32deg) translateX(-12px); }
@@ -312,6 +368,9 @@ h1 em { color: var(--blue); font-weight: 400; }
   .form-panel { padding: 22px 17px 19px; box-shadow: 6px 6px 0 #e9e5d9; }
   .question-title { font-size: 24px; }
   .question-content { min-height: 255px; }
+  .welcome-card { padding: 34px 23px 26px; }
+  .welcome-title { font-size: 27px; }
+  .welcome-message { font-size: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

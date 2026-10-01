@@ -6,13 +6,23 @@
     <meta name="theme-color" content="#eff4ff" />
     <meta name="description" content="A small, thoughtful questionnaire for Christina." />
     <title>A few questions for Christina</title>
-    <link rel="stylesheet" href="styles.css?v=page-turn-1" />
-    <script src="script.js?v=thank-you-2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=welcome-1" />
+    <script src="script.js?v=welcome-1" defer></script>
   </head>
   <body>
     <div class="sunflower-field" aria-hidden="true">
       <img class="sunflower-photo" src="assets/sunflower-background.webp" alt="" />
     </div>
+    <dialog id="welcome-dialog" class="welcome-dialog" aria-labelledby="welcome-title" aria-describedby="welcome-message">
+      <div class="welcome-card">
+        <button id="welcome-close" class="welcome-close" type="button" aria-label="Close welcome message">×</button>
+        <span class="welcome-flower" aria-hidden="true">✿</span>
+        <p class="welcome-eyebrow">A LITTLE NOTE FOR YOU</p>
+        <h2 id="welcome-title" class="welcome-title">Especially for you</h2>
+        <p id="welcome-message" class="welcome-message">I took the time to make this especially for you, Christina. I hope you like it!</p>
+        <button id="welcome-enter" class="welcome-enter" type="button" autofocus>Start the questionnaire</button>
+      </div>
+    </dialog>
     <main class="page-shell">
       <header class="topbar">
         <a class="wordmark" href="./" aria-label="A few questions home">

@@ -1,73 +1,73 @@
 const questions = [
   {
-    prompt: "What kind of day sounds best right now?",
-    hint: "Go with your first instinct.",
-    type: "choice",
-    required: true,
-    options: ["A slow morning and a long breakfast", "A little fresh air and a new place", "An easy evening with a good film"]
-  },
-  {
-    prompt: "Pick the treat you would reach for first.",
-    hint: "There is no wrong pick here.",
-    type: "choice",
-    required: true,
-    options: ["Something sweet", "Something salty", "A bit of both"]
-  },
-  {
-    prompt: "What shared moment with us still makes you smile?",
-    hint: "It can be something big or completely ordinary.",
+    prompt: "What experience in your life changed you the most, and how?",
+    hint: "Share as much or as little as feels right.",
     type: "text",
     required: false,
-    placeholder: "A moment you like remembering..."
+    placeholder: "A moment, a turning point, or how it changed you..."
   },
   {
-    prompt: "What is a small thing that makes you feel cared for?",
-    hint: "The little things count, too.",
+    prompt: "What's something about you that people usually misunderstand?",
+    hint: "You can tell me what you wish they understood.",
     type: "text",
     required: false,
-    placeholder: "Share as much or as little as you like..."
+    placeholder: "Anything you feel comfortable sharing..."
   },
   {
-    prompt: "What is something you have felt proud of lately?",
-    hint: "A win, a change, or something you handled your way.",
+    prompt: "What do you need from someone to feel completely comfortable around them?",
+    hint: "There is no right answer, and you can skip this if you prefer.",
     type: "text",
     required: false,
-    placeholder: "Anything that comes to mind..."
+    placeholder: "A quality, action, or feeling..."
   },
   {
-    prompt: "How would you most like to spend a free evening together?",
-    hint: "Pick whichever feels most like you.",
-    type: "choice",
-    required: false,
-    options: ["Stay in and make something cozy", "Go out somewhere new", "Take a walk and see where we end up"]
-  },
-  {
-    prompt: "What is something new you would love for us to try together?",
-    hint: "It can be a small plan or a bigger adventure.",
+    prompt: "What's one thing from your childhood that still affects who you are today?",
+    hint: "Only share what feels comfortable.",
     type: "text",
     required: false,
-    placeholder: "A place, a hobby, or an experience..."
+    placeholder: "A memory, lesson, or influence..."
   },
   {
-    prompt: "On a hard day, what kind of support feels best?",
-    hint: "Choose what usually helps most.",
-    type: "choice",
-    required: false,
-    options: ["Someone to listen", "A little quiet company", "Practical help", "Being asked what I need"]
-  },
-  {
-    prompt: "What would you like us to make more time for?",
-    hint: "Anything you miss or want more of is welcome.",
+    prompt: "When you're going through a hard time, do you want support, space, advice, or something else?",
+    hint: "You can describe what helps most in your own words.",
     type: "text",
     required: false,
-    placeholder: "A ritual, a conversation, or time together..."
+    placeholder: "Support, space, advice, something else..."
   },
   {
-    prompt: "Anything else you would like to add?",
-    hint: "This one is entirely optional.",
+    prompt: "What are you most afraid of losing in life?",
+    hint: "This is optional; share only what feels right.",
     type: "text",
     required: false,
-    placeholder: "A note, a thought, or nothing at all..."
+    placeholder: "A person, a part of life, or something else..."
+  },
+  {
+    prompt: "What does a healthy relationship look like to you?",
+    hint: "What helps it feel safe, caring, and mutual?",
+    type: "text",
+    required: false,
+    placeholder: "The things that matter most to you..."
+  },
+  {
+    prompt: "What's something you're working on improving about yourself right now?",
+    hint: "A goal, a habit, or a way of treating yourself.",
+    type: "text",
+    required: false,
+    placeholder: "Share only what you want to..."
+  },
+  {
+    prompt: "What makes you feel genuinely loved and appreciated?",
+    hint: "Small gestures count just as much as big ones.",
+    type: "text",
+    required: false,
+    placeholder: "A gesture, a moment, or something you hear..."
+  },
+  {
+    prompt: "If your life turned out exactly how you wanted, what would it look like five years from now?",
+    hint: "Imagine the life that would feel right to you.",
+    type: "text",
+    required: false,
+    placeholder: "The people, places, and moments in that life..."
   }
 ];
 

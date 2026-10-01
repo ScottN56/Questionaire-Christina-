@@ -321,7 +321,7 @@ function renderSummary() {
   kicker.textContent = "THANK YOU";
   const title = document.createElement("h2");
   title.className = "question-title";
-  title.textContent = "Here's to a brighter future, for us, and our family. I will always love you. 💋❤️";
+  title.textContent = "Here's to a brighter future, for us, and our family. I will always love you. 😘❤️";
   const list = document.createElement("div");
   list.className = "summary-list";
   const actions = document.createElement("div");

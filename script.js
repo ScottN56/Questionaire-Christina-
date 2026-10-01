@@ -35,10 +35,26 @@ const stepLabel = document.querySelector("#step-label");
 const progressPercent = document.querySelector("#progress-percent");
 const progressFill = document.querySelector("#progress-fill");
 const backButton = document.querySelector("#back-button");
+const nextButton = document.querySelector("#next-button");
 const nextLabel = document.querySelector("#next-label");
 const formError = document.querySelector("#form-error");
 const answers = Array(questions.length).fill("");
+const respondentOptions = ["Christina <3", "Somebody who shouldn't be looking at this. Get out."];
+const responseEmail = "chaos13.sn@gmail.com";
 let currentStep = 0;
+let respondent = "";
+
+function setPrivacyNote(message) {
+  const note = document.querySelector(".privacy-note");
+  const mark = document.createElement("span");
+  mark.setAttribute("aria-hidden", "true");
+  mark.textContent = "◌";
+  note.replaceChildren(mark, document.createTextNode(message));
+}
+
+function formatAnswers() {
+  return questions.map((question, index) => answers[index] ? `${question.prompt}\n${answers[index]}` : "").filter(Boolean).join("\n\n");
+}
 
 function renderQuestion() {
   const question = questions[currentStep];
@@ -49,6 +65,7 @@ function renderQuestion() {
   progressPercent.textContent = `${progress}%`;
   progressFill.style.width = `${progress}%`;
   backButton.hidden = currentStep === 0;
+  nextButton.hidden = false;
   nextLabel.textContent = currentStep === questions.length - 1 ? "Review answers" : "Continue";
   formError.hidden = true;
   content.replaceChildren();
@@ -112,11 +129,55 @@ function renderQuestion() {
   }
 }
 
+function renderIdentityCheck() {
+  stepLabel.textContent = "SUBMISSION CHECK";
+  progressPercent.textContent = "100%";
+  progressFill.style.width = "100%";
+  backButton.hidden = false;
+  nextButton.hidden = false;
+  nextLabel.textContent = "Confirm identity";
+  formError.hidden = true;
+  content.replaceChildren();
+
+  const kicker = document.createElement("p");
+  kicker.className = "question-kicker";
+  kicker.textContent = "ONE LAST THING";
+  const title = document.createElement("h2");
+  title.className = "question-title";
+  title.id = "question-title";
+  title.textContent = "Who is completing this questionnaire?";
+  form.setAttribute("aria-labelledby", title.id);
+
+  const choices = document.createElement("div");
+  choices.className = "choice-list";
+  respondentOptions.forEach((option) => {
+    const label = document.createElement("label");
+    label.className = "choice-option";
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "respondent";
+    input.value = option;
+    input.checked = respondent === option;
+    input.addEventListener("change", () => {
+      respondent = option;
+      formError.hidden = true;
+    });
+    const copy = document.createElement("span");
+    copy.className = "choice-copy";
+    copy.textContent = option;
+    label.append(input, copy);
+    choices.append(label);
+  });
+
+  content.append(kicker, title, choices);
+}
+
 function renderSummary() {
   stepLabel.textContent = "YOUR ANSWERS";
   progressPercent.textContent = "DONE";
   progressFill.style.width = "100%";
   backButton.hidden = true;
+  nextButton.hidden = false;
   nextLabel.textContent = "Start again";
   formError.hidden = true;
   content.replaceChildren();
@@ -126,9 +187,11 @@ function renderSummary() {
   kicker.textContent = "THANK YOU";
   const title = document.createElement("h2");
   title.className = "question-title";
-  title.textContent = "That was lovely.";
+  title.textContent = "Thank you, Christina.";
   const list = document.createElement("div");
   list.className = "summary-list";
+  const actions = document.createElement("div");
+  actions.className = "summary-actions";
 
   questions.forEach((question, index) => {
     if (!answers[index]) return;
@@ -149,27 +212,76 @@ function renderSummary() {
   copyButton.type = "button";
   copyButton.textContent = "Copy my answers";
   copyButton.addEventListener("click", async () => {
-    const text = questions.map((question, index) => answers[index] ? `${question.prompt}\n${answers[index]}` : "").filter(Boolean).join("\n\n");
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(formatAnswers());
       copyButton.textContent = "Copied";
     } catch {
       copyButton.textContent = "Copy unavailable";
     }
   });
-  content.append(kicker, title, list, copyButton);
-  document.querySelector(".privacy-note").innerHTML = "<span aria-hidden=\"true\">◌</span> Nothing is sent or saved by this page.";
+
+  const emailLink = document.createElement("a");
+  emailLink.className = "copy-button email-button";
+  emailLink.href = `mailto:${responseEmail}?subject=${encodeURIComponent("Christina's questionnaire answers")}&body=${encodeURIComponent(formatAnswers())}`;
+  emailLink.textContent = "Email my answers";
+  actions.append(copyButton, emailLink);
+  content.append(kicker, title, list, actions);
+  setPrivacyNote(`Email opens a draft to ${responseEmail}. It is sent only if you press Send.`);
+}
+
+function renderRejected() {
+  stepLabel.textContent = "QUESTIONNAIRE CLOSED";
+  progressPercent.textContent = "STOPPED";
+  progressFill.style.width = "100%";
+  backButton.hidden = true;
+  nextButton.hidden = true;
+  formError.hidden = true;
+  content.replaceChildren();
+
+  const kicker = document.createElement("p");
+  kicker.className = "question-kicker";
+  kicker.textContent = "ACCESS DENIED";
+  const title = document.createElement("h2");
+  title.className = "question-title";
+  title.id = "question-title";
+  title.textContent = "This questionnaire is for Christina.";
+  const message = document.createElement("p");
+  message.className = "question-hint";
+  message.textContent = "Please close this page.";
+  form.setAttribute("aria-labelledby", title.id);
+  content.append(kicker, title, message);
+  setPrivacyNote("Your answers were cleared. Nothing was submitted.");
 }
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (currentStep === questions.length) {
+  if (currentStep === questions.length + 1) {
     answers.fill("");
+    respondent = "";
     currentStep = 0;
-    document.querySelector(".privacy-note").innerHTML = "<span aria-hidden=\"true\">◌</span> Your answers stay on this device.";
+    setPrivacyNote("Your answers stay on this device.");
     renderQuestion();
     return;
   }
+
+  if (currentStep === questions.length) {
+    if (!respondent) {
+      formError.hidden = false;
+      content.querySelector("input")?.focus();
+      return;
+    }
+    if (respondent === respondentOptions[0]) {
+      currentStep += 1;
+      renderSummary();
+    } else {
+      answers.fill("");
+      currentStep += 2;
+      renderRejected();
+    }
+    return;
+  }
+
+  if (currentStep > questions.length + 1) return;
 
   const question = questions[currentStep];
   if (question.required && !answers[currentStep].trim()) {
@@ -181,7 +293,7 @@ form.addEventListener("submit", (event) => {
 
   if (currentStep === questions.length - 1) {
     currentStep = questions.length;
-    renderSummary();
+    renderIdentityCheck();
     return;
   }
   currentStep += 1;
@@ -189,7 +301,7 @@ form.addEventListener("submit", (event) => {
 });
 
 backButton.addEventListener("click", () => {
-  if (currentStep === 0 || currentStep === questions.length) return;
+  if (currentStep === 0 || currentStep > questions.length) return;
   currentStep -= 1;
   renderQuestion();
 });

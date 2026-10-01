@@ -15,6 +15,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 body {
   min-width: 320px;
@@ -182,8 +183,10 @@ h1 em { color: var(--green); font-weight: 400; }
 .summary-item { padding-bottom: 10px; border-bottom: 1px solid #e6e6dc; }
 .summary-question { margin: 0 0 4px; color: #81877d; font-size: 10px; }
 .summary-answer { margin: 0; color: #34473d; font-family: Georgia, "Times New Roman", serif; font-size: 16px; line-height: 1.4; overflow-wrap: anywhere; }
+.summary-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .copy-button { min-height: 40px; padding: 0 13px; border: 1px solid #b8c9bc; border-radius: 2px; background: #edf4ed; color: var(--green-dark); cursor: pointer; font-size: 11px; }
 .copy-button:hover { border-color: var(--green); }
+.email-button { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
 .page-footer { min-height: 58px; border-top: 1px solid var(--line); border-bottom: 0; font-size: 9px; }
 .footer-slash { padding: 0 5px; color: var(--coral); }
 

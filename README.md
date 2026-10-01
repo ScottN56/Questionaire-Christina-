@@ -8,7 +8,7 @@ Open `index.html` in a browser. The question text and choices are configured nea
 
 ## Answers and privacy
 
-Answers are held in the page while it is open. The page does not send or store responses. Christina can review and copy her answers at the end. Choose a destination and appropriate privacy notice before adding email delivery, a database, or analytics.
+Answers are held in the page while it is open. After Christina confirms her identity, she can review or copy the answers, or open a prefilled email draft to the configured recipient (`chaos13.sn@gmail.com`). The page does not send or store responses; the email is sent only if she presses Send in her email app. The recipient address is included in the client-side source. Choosing the other identity option clears the answers and closes the questionnaire.
 
 ## Publish with GitHub Pages
 

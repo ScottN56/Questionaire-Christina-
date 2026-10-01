@@ -88,6 +88,7 @@ const respondentOptions = ["Christina <3", "Somebody who shouldn't be looking at
 const responseEmail = "chaos13.sn@gmail.com";
 let currentStep = 0;
 let respondent = "";
+let hasRenderedQuestionPage = false;
 let soundEnabled = true;
 let audioContext;
 let encouragementTimer;
@@ -146,6 +147,19 @@ function playEncouragementSound() {
     oscillator.start(noteStart);
     oscillator.stop(noteStart + 0.23);
   });
+}
+
+function animateQuestionPage() {
+  if (!hasRenderedQuestionPage) {
+    hasRenderedQuestionPage = true;
+    return;
+  }
+  content.classList.remove("page-turn");
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  void content.offsetWidth;
+  content.addEventListener("animationend", () => content.classList.remove("page-turn"), { once: true });
+  content.classList.add("page-turn");
 }
 
 function renderQuestion() {
@@ -219,6 +233,7 @@ function renderQuestion() {
     content.append(textarea);
     requestAnimationFrame(() => textarea.focus({ preventScroll: true }));
   }
+  animateQuestionPage();
 }
 
 function renderIdentityCheck() {
@@ -262,6 +277,7 @@ function renderIdentityCheck() {
   });
 
   content.append(kicker, title, choices);
+  animateQuestionPage();
 }
 
 function renderSummary() {
@@ -319,6 +335,7 @@ function renderSummary() {
   actions.append(copyButton, emailLink);
   content.append(kicker, title, list, actions);
   setPrivacyNote(`Email opens a draft to ${responseEmail}. It is sent only if you press Send.`);
+  animateQuestionPage();
 }
 
 function renderRejected() {
@@ -343,6 +360,7 @@ function renderRejected() {
   form.setAttribute("aria-labelledby", title.id);
   content.append(kicker, title, message);
   setPrivacyNote("Your answers were cleared. Nothing was submitted.");
+  animateQuestionPage();
 }
 
 form.addEventListener("submit", (event) => {

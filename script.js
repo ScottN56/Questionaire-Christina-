@@ -80,6 +80,10 @@ const backButton = document.querySelector("#back-button");
 const nextButton = document.querySelector("#next-button");
 const nextLabel = document.querySelector("#next-label");
 const formError = document.querySelector("#form-error");
+const musicToggle = document.querySelector("#music-toggle");
+const musicLabel = document.querySelector("#music-label");
+const musicPlayer = document.querySelector("#music-player");
+const musicNote = document.querySelector("#music-note");
 const answers = Array(questions.length).fill("");
 const respondentOptions = ["Christina <3", "Somebody who shouldn't be looking at this. Get out."];
 const responseEmail = "chaos13.sn@gmail.com";
@@ -346,6 +350,29 @@ backButton.addEventListener("click", () => {
   if (currentStep === 0 || currentStep > questions.length) return;
   currentStep -= 1;
   renderQuestion();
+});
+
+musicToggle.addEventListener("click", () => {
+  if (!musicPlayer.hidden) {
+    musicPlayer.replaceChildren();
+    musicPlayer.hidden = true;
+    musicToggle.setAttribute("aria-expanded", "false");
+    musicLabel.textContent = "Play music";
+    musicNote.textContent = "Music is off.";
+    return;
+  }
+
+  const player = document.createElement("iframe");
+  player.title = "YouTube background music player";
+  player.allow = "autoplay; encrypted-media; picture-in-picture";
+  player.allowFullscreen = true;
+  player.referrerPolicy = "strict-origin-when-cross-origin";
+  player.src = "https://www.youtube-nocookie.com/embed/Q5z6RHIpi2Y?autoplay=1&controls=1&playsinline=1&list=RDQ5z6RHIpi2Y";
+  musicPlayer.replaceChildren(player);
+  musicPlayer.hidden = false;
+  musicToggle.setAttribute("aria-expanded", "true");
+  musicLabel.textContent = "Stop music";
+  musicNote.textContent = "If it does not start, press Play in the video.";
 });
 
 renderQuestion();

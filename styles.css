@@ -225,7 +225,7 @@ h1 {
   line-height: 0.98;
 }
 h1 em { color: var(--blue); font-weight: 400; }
-.intro-copy { max-width: 340px; margin: 0; color: #53658f; font-size: 15px; line-height: 1.75; }
+.intro-copy { max-width: 340px; margin: 0; color: var(--blue-dark); font-family: Georgia, "Times New Roman", serif; font-size: 16px; font-style: italic; line-height: 1.65; }
 .intro-footer { display: flex; align-items: center; gap: 12px; margin-top: 58px; color: var(--muted); font-size: 11px; }
 .sun-mark { color: var(--pink); font-size: 17px; }
 .footer-rule { width: 28px; height: 1px; margin: 0 2px; background: #edc958; }

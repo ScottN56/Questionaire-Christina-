@@ -110,14 +110,8 @@ button { color: inherit; }
   height: 100%;
   object-fit: cover;
   object-position: center 44%;
-  opacity: 0.56;
-  filter: saturate(1.05) contrast(0.92);
-}
-.sunflower-field::after {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgb(239 244 255 / 54%), rgb(255 247 221 / 60%) 52%, rgb(255 232 241 / 62%));
-  content: "";
+  opacity: 1;
+  filter: saturate(1.08) contrast(1.02);
 }
 
 .topbar {
@@ -229,7 +223,9 @@ h1 {
   line-height: 0.98;
 }
 h1 em { color: var(--blue); font-weight: 400; }
-.intro-copy { max-width: 340px; margin: 0; color: var(--blue-dark); font-family: Georgia, "Times New Roman", serif; font-size: 16px; font-style: italic; line-height: 1.65; }
+.intro-copy { max-width: 340px; margin: 0; color: #fffdf8; font-family: Georgia, "Times New Roman", serif; font-size: 16px; font-style: italic; line-height: 1.65; text-shadow: 0 1px 3px #1b2b50, 0 0 12px #1b2b50cc; }
+.intro .eyebrow, .intro h1 { color: #fffdf8; text-shadow: 0 1px 3px #1b2b50, 0 0 12px #1b2b50cc; }
+.intro h1 em { color: #ffe078; }
 .intro-footer { display: flex; align-items: center; gap: 12px; margin-top: 58px; color: var(--muted); font-size: 11px; }
 .sun-mark { color: var(--pink); font-size: 17px; }
 .footer-rule { width: 28px; height: 1px; margin: 0 2px; background: #edc958; }
@@ -349,7 +345,7 @@ h1 em { color: var(--blue); font-weight: 400; }
   .intro::before { top: -17px; left: -20px; width: 76px; }
   .portrait-row { gap: 14px; margin-bottom: 20px; }
   .christina-photo { width: 96px; }
-  .sunflower-photo { object-position: center; opacity: 0.45; }
+  .sunflower-photo { object-position: center; }
   h1 { margin-top: 22px; font-size: clamp(53px, 11vw, 72px); }
   .intro-copy { max-width: 400px; }
   .intro-footer { margin-top: 26px; }
@@ -364,7 +360,6 @@ h1 em { color: var(--blue); font-weight: 400; }
   .questionnaire { gap: 32px; padding: 43px 3% 42px; }
   .intro-copy { font-size: 14px; }
   .christina-photo { width: 82px; }
-  .sunflower-photo { opacity: 0.38; }
   .form-panel { padding: 22px 17px 19px; box-shadow: 6px 6px 0 #e9e5d9; }
   .question-title { font-size: 24px; }
   .question-content { min-height: 255px; }

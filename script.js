@@ -80,11 +80,27 @@ const backButton = document.querySelector("#back-button");
 const nextButton = document.querySelector("#next-button");
 const nextLabel = document.querySelector("#next-label");
 const formError = document.querySelector("#form-error");
+const soundToggle = document.querySelector("#sound-toggle");
+const soundLabel = document.querySelector("#sound-label");
+const encouragementToast = document.querySelector("#encouragement-toast");
 const answers = Array(questions.length).fill("");
 const respondentOptions = ["Christina <3", "Somebody who shouldn't be looking at this. Get out."];
 const responseEmail = "chaos13.sn@gmail.com";
 let currentStep = 0;
 let respondent = "";
+let soundEnabled = true;
+let audioContext;
+let encouragementTimer;
+const encouragementMessages = [
+  "Thanks for sharing that.",
+  "That was lovely to hear.",
+  "I'm glad you told me.",
+  "Every little detail helps me know you better.",
+  "Thank you for letting me in.",
+  "That sounds special.",
+  "I'll remember that.",
+  "Your honesty means a lot."
+];
 
 function setPrivacyNote(message) {
   const note = document.querySelector(".privacy-note");
@@ -96,6 +112,40 @@ function setPrivacyNote(message) {
 
 function formatAnswers() {
   return questions.map((question, index) => answers[index] ? `${question.prompt}\n${answers[index]}` : "").filter(Boolean).join("\n\n");
+}
+
+function showEncouragement() {
+  const messageIndex = Math.floor(Math.random() * encouragementMessages.length);
+  encouragementToast.textContent = encouragementMessages[messageIndex];
+  encouragementToast.hidden = false;
+  clearTimeout(encouragementTimer);
+  encouragementTimer = setTimeout(() => {
+    encouragementToast.hidden = true;
+  }, 2200);
+}
+
+function playEncouragementSound() {
+  const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
+  if (!soundEnabled || !AudioContextConstructor) return;
+
+  audioContext ??= new AudioContextConstructor();
+  if (audioContext.state === "suspended") audioContext.resume();
+
+  const startTime = audioContext.currentTime;
+  [659.25, 783.99].forEach((frequency, index) => {
+    const noteStart = startTime + index * 0.1;
+    const oscillator = audioContext.createOscillator();
+    const volume = audioContext.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(frequency, noteStart);
+    volume.gain.setValueAtTime(0.0001, noteStart);
+    volume.gain.exponentialRampToValueAtTime(0.035, noteStart + 0.015);
+    volume.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.22);
+    oscillator.connect(volume);
+    volume.connect(audioContext.destination);
+    oscillator.start(noteStart);
+    oscillator.stop(noteStart + 0.23);
+  });
 }
 
 function renderQuestion() {
@@ -333,6 +383,14 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
+  if (answers[currentStep].trim()) {
+    showEncouragement();
+    playEncouragementSound();
+  } else {
+    clearTimeout(encouragementTimer);
+    encouragementToast.hidden = true;
+  }
+
   if (currentStep === questions.length - 1) {
     currentStep = questions.length;
     renderIdentityCheck();
@@ -346,6 +404,13 @@ backButton.addEventListener("click", () => {
   if (currentStep === 0 || currentStep > questions.length) return;
   currentStep -= 1;
   renderQuestion();
+});
+
+soundToggle.addEventListener("click", () => {
+  soundEnabled = !soundEnabled;
+  soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+  soundToggle.setAttribute("aria-label", soundEnabled ? "Mute sound effects" : "Enable sound effects");
+  soundLabel.textContent = soundEnabled ? "Sound on" : "Sound off";
 });
 
 renderQuestion();

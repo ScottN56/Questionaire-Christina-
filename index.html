@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#eff4ff" />
     <meta name="description" content="A small, thoughtful questionnaire for Christina." />
     <title>A few questions for Christina</title>
-    <link rel="stylesheet" href="styles.css?v=no-music-2" />
-    <script src="script.js?v=no-music-2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=encouragement-1" />
+    <script src="script.js?v=encouragement-1" defer></script>
   </head>
   <body>
     <div class="sunflower-field" aria-hidden="true">
@@ -19,7 +19,12 @@
           <span class="wordmark-mark" aria-hidden="true">C.</span>
           <span>JUST BETWEEN US</span>
         </a>
-        <span class="topbar-note">A little questionnaire</span>
+        <div class="topbar-actions">
+          <span class="topbar-note">A little questionnaire</span>
+          <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="true" aria-label="Mute sound effects">
+            <span aria-hidden="true">♫</span><span id="sound-label">Sound on</span>
+          </button>
+        </div>
       </header>
 
       <section class="questionnaire" aria-labelledby="page-title">
@@ -62,6 +67,8 @@
           <p class="privacy-note"><span aria-hidden="true">◌</span> Your answers stay on this device.</p>
         </div>
       </section>
+
+      <div id="encouragement-toast" class="encouragement-toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
 
       <footer class="page-footer">
         <span>AN OPEN INVITATION</span>
